@@ -2,9 +2,13 @@ var parsley = require('parsley');
 var net = require('net');
 var fs = require('fs');
 
+var config = require('./config.json');
+port = config['port'];
+logfile = config['log'];
+
 function simpleLog(string) {
     console.log(string);
-    fs.appendFile('log.txt', string);
+    fs.appendFile(logfile, string);
 }
 
 net.createServer(function (stream) {
@@ -32,4 +36,4 @@ net.createServer(function (stream) {
             stream.end();
         });
     });
-}).listen(8080);
+}).listen(port);
